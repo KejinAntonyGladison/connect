@@ -1,12 +1,13 @@
 import Chat from './Chat'
 import ChatInput from './ChatInput'
 import axios from 'axios'
-import {useState, useEffect} from "react"
+import {useState, useRef, useEffect} from "react"
 
 
 const ChatDisplay = ({ user , clickedUser }) => {
     const userId = user?.user_id
     const clickedUserId = clickedUser?.user_id
+    const messageEl = useRef(null);
     const [usersMessages, setUsersMessages] = useState(null)
     const [clickedUsersMessages, setClickedUsersMessages] = useState(null)
 
@@ -55,13 +56,22 @@ const ChatDisplay = ({ user , clickedUser }) => {
     }
 
     useEffect(() => {
+        if (messageEl) {
+          messageEl.current.addEventListener('DOMNodeInserted', event => {
+            const { currentTarget: target } = event;
+            target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+          });
+        }
+      }, [])
+
+    useEffect(() => {
         getUsersMessages()
         getClickedUsersMessages()
     }, [descendingOrderMessages])
 
     return (
         <>
-        <Chat descendingOrderMessages={descendingOrderMessages}/>
+        <Chat descendingOrderMessages={descendingOrderMessages} messageEl={messageEl}/>
      <ChatInput
          user={user}
          clickedUser={clickedUser} getUserMessages={getUsersMessages} getClickedUsersMessages={getClickedUsersMessages}/>

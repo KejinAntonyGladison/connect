@@ -1,7 +1,7 @@
-const Chat = ({descendingOrderMessages}) => {
+const Chat = ({descendingOrderMessages, messageEl}) => {
     return (
         <>
-            <div className="chat-display">
+            <div className="chat-display" ref={messageEl}>
                 {descendingOrderMessages.map((message, _index) => (
                     <div key={_index}>
                         <div className="chat-message-header">
