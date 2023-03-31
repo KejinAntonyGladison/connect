@@ -80,7 +80,9 @@ app.post('/login', async (req, res) => {
             res.status(201).json({token, userId: user.user_id})
         }
 
-        res.status(400).json('Invalid Credentials')
+        else {
+            res.status(400).json('Invalid Credentials')
+        }
 
     } catch (err) {
         console.log(err)
