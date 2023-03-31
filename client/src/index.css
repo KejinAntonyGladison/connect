@@ -308,6 +308,20 @@ nav .logo-container .logo {
     overflow-y: auto;
 }
 
+.chat-display .name-info {
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.chat-display .date-info {
+    font-size: 12px;
+    margin: 0;
+}
+
+.chat-display .message-info {
+    margin-top: 10px;
+}
+
 /*-------- Chat Input --------*/
 .chat-input {
     padding: 20px;

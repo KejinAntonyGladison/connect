@@ -10,6 +10,28 @@ const ChatDisplay = ({ user , clickedUser }) => {
     const [usersMessages, setUsersMessages] = useState(null)
     const [clickedUsersMessages, setClickedUsersMessages] = useState(null)
 
+    const messages = []
+
+    usersMessages?.forEach(message => {
+        const formattedMessage = {}
+        formattedMessage['name'] = user?.first_name
+        formattedMessage['img'] = user?.url
+        formattedMessage['message'] = message.message
+        formattedMessage['timestamp'] = message.timestamp
+        messages.push(formattedMessage)
+    })
+
+    clickedUsersMessages?.forEach(message => {
+        const formattedMessage = {}
+        formattedMessage['name'] = clickedUser?.first_name
+        formattedMessage['img'] = clickedUser?.url
+        formattedMessage['message'] = message.message
+        formattedMessage['timestamp'] = message.timestamp
+        messages.push(formattedMessage)
+    })
+
+    const descendingOrderMessages = messages?.sort((a,b) => a.timestamp.localeCompare(b.timestamp))
+
     const getUsersMessages = async () => {
      try {
             const response = await axios.get('http://localhost:8000/messages', {
@@ -35,29 +57,7 @@ const ChatDisplay = ({ user , clickedUser }) => {
     useEffect(() => {
         getUsersMessages()
         getClickedUsersMessages()
-    }, [])
-
-    const messages = []
-
-    usersMessages?.forEach(message => {
-        const formattedMessage = {}
-        formattedMessage['name'] = user?.first_name
-        formattedMessage['img'] = user?.url
-        formattedMessage['message'] = message.message
-        formattedMessage['timestamp'] = message.timestamp
-        messages.push(formattedMessage)
-    })
-
-    clickedUsersMessages?.forEach(message => {
-        const formattedMessage = {}
-        formattedMessage['name'] = clickedUser?.first_name
-        formattedMessage['img'] = clickedUser?.url
-        formattedMessage['message'] = message.message
-        formattedMessage['timestamp'] = message.timestamp
-        messages.push(formattedMessage)
-    })
-
-    const descendingOrderMessages = messages?.sort((a,b) => a.timestamp.localeCompare(b.timestamp))
+    }, [descendingOrderMessages])
 
     return (
         <>
