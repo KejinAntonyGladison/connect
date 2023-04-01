@@ -50,6 +50,11 @@ h2 {
     border: solid 2px rgb(48, 48, 48);
 }
 
+.secondary-button:active {
+    color: rgb(254, 48, 114);
+    border: solid 2px rgb(254, 48, 114);
+}
+
 
 /*-------- Navbar --------*/
 
@@ -265,6 +270,8 @@ nav .logo-container .logo {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0px;
 }
 
 .chat-container .option {
@@ -274,6 +281,12 @@ nav .logo-container .logo {
     font-size: 20px;
     margin: 2px;
     padding: 10px;
+}
+
+.chat-container .options-container {
+    background-color: rgb(255, 255, 255);
+    justify-content: space-between;
+    
 }
 
 .chat-container .option:disabled {
@@ -304,7 +317,7 @@ nav .logo-container .logo {
 .chat-display,
 .matches-display {
     padding: 20px;
-    height: 60vh;
+    height: 50vh;
     overflow-y: auto;
 }
 
@@ -327,6 +340,17 @@ nav .logo-container .logo {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    position: sticky;
+    bottom: 0px;
+}
+
+.chat-input .message-input-field {
+    resize: none;
+    overflow: auto;
+    width: auto;
+    height: 60px;
+    font-size: 15px;
+    padding: 5px;
 }
 
 
