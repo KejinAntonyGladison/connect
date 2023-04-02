@@ -262,6 +262,13 @@ nav .logo-container .logo {
     width: 30%;
     text-align: left;
     z-index: 1;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+    .chat-container {
+        width: 40%;
+    }
 }
 
 .chat-container .chat-container-header {
@@ -351,8 +358,8 @@ nav .logo-container .logo {
     height: 60px;
     font-size: 15px;
     padding: 5px;
+    border: solid 2px rgb(187, 187, 187);
 }
-
 
 
 
