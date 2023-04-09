@@ -2,6 +2,7 @@ import Chat from './Chat'
 import ChatInput from './ChatInput'
 import axios from 'axios'
 import {useState, useRef, useEffect} from "react"
+import { useDispatch } from "react-redux";
 
 
 const ChatDisplay = ({ user , clickedUser }) => {
@@ -10,7 +11,7 @@ const ChatDisplay = ({ user , clickedUser }) => {
     const messageEl = useRef(null);
     const [usersMessages, setUsersMessages] = useState(null)
     const [clickedUsersMessages, setClickedUsersMessages] = useState(null)
-
+    
     const messages = []
 
     usersMessages?.forEach(message => {
@@ -19,6 +20,7 @@ const ChatDisplay = ({ user , clickedUser }) => {
         formattedMessage['img'] = user?.url
         formattedMessage['message'] = message.message
         formattedMessage['timestamp'] = message.timestamp
+        formattedMessage['messageLocalTime'] = message.messageLocalTime
         messages.push(formattedMessage)
     })
 
@@ -28,6 +30,7 @@ const ChatDisplay = ({ user , clickedUser }) => {
         formattedMessage['img'] = clickedUser?.url
         formattedMessage['message'] = message.message
         formattedMessage['timestamp'] = message.timestamp
+        formattedMessage['messageLocalTime'] = message.messageLocalTime
         messages.push(formattedMessage)
     })
 
@@ -57,12 +60,13 @@ const ChatDisplay = ({ user , clickedUser }) => {
 
     useEffect(() => {
         if (messageEl) {
-          messageEl.current.addEventListener('DOMNodeInserted', event => {
-            const { currentTarget: target } = event;
-            target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
-          });
+            messageEl.current.addEventListener('DOMNodeInserted', event => {
+                const { currentTarget: target } = event;
+                target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+            });
         }
-      }, [])
+    }, [])
+
 
     useEffect(() => {
         getUsersMessages()
@@ -72,9 +76,11 @@ const ChatDisplay = ({ user , clickedUser }) => {
     return (
         <>
         <Chat descendingOrderMessages={descendingOrderMessages} messageEl={messageEl}/>
-    <ChatInput
-        user={user}
-        clickedUser={clickedUser} getUserMessages={getUsersMessages} getClickedUsersMessages={getClickedUsersMessages}/>
+        <ChatInput
+            user={user}
+            clickedUser={clickedUser}
+            getUserMessages={getUsersMessages}
+            getClickedUsersMessages={getClickedUsersMessages}/>
         </>
     )
 }

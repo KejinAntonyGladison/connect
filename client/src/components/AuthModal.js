@@ -13,8 +13,6 @@ const AuthModal = ({ setShowModal,  isSignUp }) => {
 
     let navigate = useNavigate()
 
-    console.log(email, password, confirmPassword)
-
 
     const handleClick = () => {
         setShowModal(false)
@@ -48,7 +46,7 @@ const AuthModal = ({ setShowModal,  isSignUp }) => {
 
     return (
         <div className="auth-modal">
-            <div className="close-icon" onClick={handleClick}>ⓧ</div>
+            <div className="close-icon" onClick={handleClick}>&#x2716;</div>
 
             <h2>{isSignUp ? 'CREATE ACCOUNT': 'LOG IN'}</h2>
             <p>By clicking Log In, you agree to our terms. Learn how we process your data in our Privacy Policy and Cookie Policy.</p>

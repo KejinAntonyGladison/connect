@@ -6,7 +6,7 @@ const ChatHeader = ({ user }) => {
     const logout = () => {
         removeCookie('UserId', cookies.UserId)
         removeCookie('AuthToken', cookies.AuthToken)
-        window.location.reload()
+        window.location.replace("/")
     }
 
     return (
@@ -17,7 +17,7 @@ const ChatHeader = ({ user }) => {
                 </div>
                 <h3>{user.first_name}</h3>
             </div>
-            <i className="log-out-icon" onClick={logout}>⇦</i>
+            <i className="log-out-icon" onClick={logout}>&#8617;</i>
         </div>
     )
 }
